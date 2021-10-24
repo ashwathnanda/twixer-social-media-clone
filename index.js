@@ -12,6 +12,7 @@ CONNECTION_URI = config.database.connectionString;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }),
 });
 
 // DB Connection + Server start
