@@ -1,5 +1,5 @@
 const Posts = require("../../models/Posts");
-const { verifyToken } = require("../../helpers/auth");
+const { verifyAndReturnUser } = require("../../helpers/auth");
 const { AuthenticationError } = require("apollo-server");
 
 const postResolver = {
@@ -27,7 +27,7 @@ const postResolver = {
 
   Mutation: {
     async createPost(_, { body }, context) {
-      const user = verifyToken(context);
+      const user = verifyAndReturnUser(context);
 
       const newPost = Posts({
         body,
@@ -39,7 +39,7 @@ const postResolver = {
       return await newPost.save();
     },
     async deletePost(_, { postId }, context) {
-      const user = verifyToken(context);
+      const user = verifyAndReturnUser(context);
       try {
         const post = await Posts.findById(postId);
         if (post.username === user.username) {

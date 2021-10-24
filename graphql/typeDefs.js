@@ -19,7 +19,6 @@ const typeDefs = gql`
 
   type Like {
     id: ID!
-    body: String!
     username: String!
     createdAt: String!
   }
@@ -57,7 +56,7 @@ const typeDefs = gql`
     deletePost(postId: ID!): String!
     addComment(postId: ID!, body: String!): Posts!
     deleteComment(postId: ID!, commentId: ID!): Posts!
-    addLike(postId: ID!): Posts!
+    likePosts(postId: ID!): Posts!
   }
 `;
 

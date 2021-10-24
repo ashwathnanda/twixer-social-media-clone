@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 const { AuthenticationError } = require("apollo-server");
 
-module.exports.verifyToken = (context) => {
+module.exports.verifyAndReturnUser = (context) => {
   // context will contain multiple values.
   // We are concerned with the header
   const authHeader = context.req.headers.authorization;
