@@ -36,7 +36,13 @@ const postResolver = {
         createdAt: new Date().toISOString(),
       });
 
-      return await newPost.save();
+      const post = await newPost.save();
+
+      context.pubSub.publish("NEW_POST", {
+        newPost: post,
+      });
+
+      return post;
     },
     async deletePost(_, { postId }, context) {
       const user = verifyAndReturnUser(context);
@@ -53,6 +59,12 @@ const postResolver = {
       } catch (err) {
         throw new Error(err);
       }
+    },
+  },
+
+  Subscription: {
+    newPost: {
+      subscribe: (_, __, { pubSub }) => pubSub.asyncIterator("NEW_POST"),
     },
   },
 };

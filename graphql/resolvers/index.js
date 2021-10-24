@@ -4,6 +4,12 @@ const commentsResolver = require("./comments");
 const likesResolver = require("./likes");
 
 module.exports = {
+  // Modifier that will execute everytime Post is returned.
+  Posts: {
+    likeCount: (parent) => parent.likes.length,
+    commentCount: (parent) => parent.comments.length,
+  },
+
   Query: {
     ...postResolvers.Query,
   },
@@ -12,5 +18,8 @@ module.exports = {
     ...postResolvers.Mutation,
     ...commentsResolver.Mutation,
     ...likesResolver.Mutation,
+  },
+  Subscription: {
+    ...postResolvers.Subscription,
   },
 };

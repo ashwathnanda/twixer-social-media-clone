@@ -1,4 +1,5 @@
 const { ApolloServer } = require("apollo-server");
+const { PubSub } = require("graphql-subscriptions");
 const mongoose = require("mongoose");
 
 const resolvers = require("./graphql/resolvers");
@@ -8,11 +9,14 @@ const config = require("./config");
 // Constants
 CONNECTION_URI = config.database.connectionString;
 
+//PubSub Class Instantiate
+const pubSub = new PubSub();
+
 // GraphQL Server.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
+  context: ({ req }) => ({ req, pubSub }),
 });
 
 // DB Connection + Server start
