@@ -1,6 +1,6 @@
 const Posts = require("../../models/Posts");
 const { verifyAndReturnUser } = require("../../helpers/auth");
-const { AuthenticationError } = require("apollo-server");
+const { AuthenticationError, UserInputError } = require("apollo-server");
 
 const postResolver = {
   Query: {
@@ -28,6 +28,9 @@ const postResolver = {
   Mutation: {
     async createPost(_, { body }, context) {
       const user = verifyAndReturnUser(context);
+      if (body.trim() === "") {
+        throw new UserInputError("Body must not be empty");
+      }
 
       const newPost = Posts({
         body,
