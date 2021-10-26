@@ -5,22 +5,18 @@ import { Grid, GridRow, Image } from "semantic-ui-react";
 import Postcard from "../components/Postcard";
 
 function Home(props) {
-  const {
-    loading,
-    data: { getPosts: posts },
-  } = useQuery(FETCH_POST_QUERY);
-
+  const { loading, data } = useQuery(FETCH_POST_QUERY);
   return (
     <Grid columns={3}>
-      <GridRow>
+      <GridRow className="page-title">
         <h1>Recent Posts</h1>
       </GridRow>
       <Grid.Row>
         {loading ? (
           <h1>Loading Posts..</h1>
         ) : (
-          posts &&
-          posts.map((post) => (
+          data &&
+          data.getPosts.map((post) => (
             <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
               <Postcard post={post} />
             </Grid.Column>
