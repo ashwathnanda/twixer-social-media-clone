@@ -17,7 +17,7 @@ module.exports = {
       const { valid, error } = validateLoginInput(username, password);
 
       if (!valid) {
-        throw UserInputError("Please enter username/password", { error });
+        throw new UserInputError("Please enter username/password", { error });
       }
 
       const userObject = await Users.findOne({ username });
