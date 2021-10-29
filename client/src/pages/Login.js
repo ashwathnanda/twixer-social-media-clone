@@ -52,7 +52,7 @@ function Login(props) {
             onSubmit={onSubmit}
             className={loading ? "loading" : ""}
           >
-            <Segment stacked>
+            <Segment raised>
               <Form.Input
                 fluid
                 icon="user"
@@ -80,19 +80,17 @@ function Login(props) {
               </Button>
             </Segment>
           </Form>
+          {Object.keys(errors).length > 0 && (
+            <div className="ui error message">
+              <ul className="list">
+                {Object.values(errors).map((value) => (
+                  <li key={value}>{value}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <Message>
-            {Object.keys(errors).length > 0 && (
-              <div className="ui error message">
-                <ul className="list">
-                  {Object.values(errors).map((value) => (
-                    <li key={value}>{value}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </Message>
-          <Message>
-            New to us? <Link to="/register">Sign Up</Link>
+            New to Twixer? <Link to="/register">Sign Up</Link>
           </Message>
         </Grid.Column>
       </Grid>

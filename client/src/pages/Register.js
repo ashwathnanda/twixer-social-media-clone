@@ -44,7 +44,7 @@ function Register(props) {
             noValidate
             className={loading ? "loading" : ""}
           >
-            <Segment stacked>
+            <Segment raised>
               {/*Firstname*/}
               <Form.Input
                 fluid
