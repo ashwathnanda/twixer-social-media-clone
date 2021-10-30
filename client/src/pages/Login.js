@@ -14,6 +14,7 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import logo from "../images/logo.jpg";
 import { AuthContext } from "../context/auth";
+import { LOGIN_USER } from "../utils/graphqlQuery/loginUser";
 
 function Login(props) {
   const context = useContext(AuthContext);
@@ -101,14 +102,5 @@ function Login(props) {
     </div>
   );
 }
-const LOGIN_USER = gql`
-  mutation Login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      username
-      token
-      email
-    }
-  }
-`;
+
 export default Login;
