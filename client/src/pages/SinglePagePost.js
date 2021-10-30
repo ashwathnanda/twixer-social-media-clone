@@ -6,9 +6,12 @@ import {
   Card,
   Grid,
   GridRow,
+  Header,
   Icon,
   Image,
   Label,
+  Comment,
+  Segment,
 } from "semantic-ui-react";
 import moment from "moment";
 import LikeButton from "../components/LikeButton";
@@ -84,6 +87,30 @@ function SinglePagePost(props) {
                 )}
               </Card.Content>
             </Card>
+            {comments.map((comment) => (
+              <Segment raised>
+                <Comment.Group>
+                  <Header as="h3" dividing>
+                    Comments
+                  </Header>
+                  <Comment key={comment.id}>
+                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                    <Comment.Content>
+                      <Comment.Author as="a">{comment.username}</Comment.Author>
+                      <Comment.Metadata>
+                        <div>{moment(createdAt).fromNow()}</div>
+                      </Comment.Metadata>
+                      <Comment.Text>{comment.body}</Comment.Text>
+                      {user && user.username === comment.username && (
+                        <Comment.Actions>
+                          <Comment.Action>Reply</Comment.Action>
+                        </Comment.Actions>
+                      )}
+                    </Comment.Content>
+                  </Comment>
+                </Comment.Group>
+              </Segment>
+            ))}
           </Grid.Column>
         </Grid.Row>
       </Grid>
