@@ -11,7 +11,6 @@ import {
 import { Link } from "react-router-dom";
 import { useForm } from "../utils/hooks";
 import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
 import logo from "../images/logo.jpg";
 import { AuthContext } from "../context/auth";
 import { LOGIN_USER } from "../utils/graphqlQuery/loginUser";

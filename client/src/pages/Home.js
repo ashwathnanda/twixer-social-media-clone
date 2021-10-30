@@ -16,11 +16,11 @@ function Home(props) {
         <h1>Recent Posts</h1>
       </GridRow>
       <Grid.Row>
-        {user && (
-          <Grid.Column>
-            <PostForm />
-          </Grid.Column>
-        )}
+        {/*{user && (*/}
+        {/*  <Grid.Column>*/}
+        {/*    <PostForm />*/}
+        {/*  </Grid.Column>*/}
+        {/*)}*/}
 
         {loading ? (
           <h1>Loading Posts..</h1>

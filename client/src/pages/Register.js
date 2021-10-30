@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Button, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
-import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { useForm } from "../utils/hooks";
 import logo from "../images/logo.jpg";

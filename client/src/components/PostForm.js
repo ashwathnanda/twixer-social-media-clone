@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Form, FormInput } from "semantic-ui-react";
+import { Button, Form, TextArea } from "semantic-ui-react";
 import { useForm } from "../utils/hooks";
-import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { CREATE_POST_MUTATION } from "../utils/graphqlQuery/createPost";
 import { FETCH_POST_QUERY } from "../utils/graphqlQuery/getPost";
@@ -36,16 +35,22 @@ function PostForm(props) {
   return (
     <>
       <Form onSubmit={onSubmit}>
-        <h2>Create a post</h2>
         <Form.Field>
-          <FormInput
+          <TextArea
+            focus
             placeholder="Enter your message"
             onChange={onChange}
             name="body"
             value={values.body}
             error={!!error}
           />
-          <Button type="submit" color="teal" fluid size="large">
+          <Button
+            type="submit"
+            color="teal"
+            fluid
+            size="large"
+            style={{ marginTop: 20 }}
+          >
             Submit
           </Button>
         </Form.Field>
