@@ -1,24 +1,24 @@
 import gql from "graphql-tag";
 
-export const FETCH_POST_QUERY = gql`
-  {
-    getPosts {
+export const FETCH_SINGLE_POST_QUERY = gql`
+  query getSinglePost($postId: ID!) {
+    getPost(postId: $postId) {
       id
       username
+      createdAt
       body
+      likes {
+        id
+        createdAt
+        username
+      }
       comments {
         id
+        createdAt
         body
-        username
-        createdAt
       }
-      likes {
-        username
-        createdAt
-      }
-      createdAt
-      likeCount
       commentCount
+      likeCount
     }
   }
 `;

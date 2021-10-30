@@ -8,6 +8,7 @@ function CreatePostModal(props) {
   return (
     <Modal
       size="tiny"
+      centered
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}

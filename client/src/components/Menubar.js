@@ -11,7 +11,6 @@ function Menubar() {
   const pathName = window.location.pathname;
   const path = pathName === "/" ? "home" : pathName.substr(1);
   const [activeItem, setActiveItem] = useState(path);
-  const [open, setOpen] = useState(false);
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
