@@ -1,18 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@apollo/client";
 import { FETCH_SINGLE_POST_QUERY } from "../utils/graphqlQuery/getPost";
 import {
   Button,
   Card,
   Grid,
-  GridRow,
   Header,
   Icon,
   Image,
   Label,
   Comment,
   Segment,
-  Form,
   Popup,
 } from "semantic-ui-react";
 import moment from "moment";
@@ -23,7 +21,6 @@ import DeleteCommentButton from "../components/DeleteCommentButton";
 import AddCommentButton from "../components/addCommentButton";
 
 function SinglePagePost(props) {
-  const [deleteButton, showDeleteButton] = useState(false);
   const postId = props.match.params.postId;
 
   const { user } = useContext(AuthContext);

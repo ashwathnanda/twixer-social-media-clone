@@ -8,6 +8,7 @@ const config = require("./config");
 
 // Constants
 CONNECTION_URI = config.database.connectionString;
+APP_PORT = process.env.PORT || 5000;
 
 //PubSub Class Instantiate
 const pubSub = new PubSub();
@@ -24,8 +25,11 @@ mongoose
   .connect(CONNECTION_URI)
   .then(() => {
     console.log("MongoDB Connected Successfully.");
-    return server.listen({ port: 5000 });
+    return server.listen({ port: APP_PORT });
   })
   .then((res) => {
     console.log(`Server running at ${res.url}`);
+  })
+  .catch((err) => {
+    console.log(err);
   });
