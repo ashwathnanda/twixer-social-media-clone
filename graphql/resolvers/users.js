@@ -9,7 +9,7 @@ const {
 } = require("../../helpers/validators");
 const { getAccessToken } = require("../../helpers/jwt");
 
-SECRET_KEY = config.jwt.secretKey;
+SECRET_KEY = process.env.JWT_SECRET || config.jwt.secretKey;
 
 module.exports = {
   Mutation: {

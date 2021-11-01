@@ -3,7 +3,7 @@ const config = require("../config");
 
 module.exports.getAccessToken = (user) => {
   // Generate JWT Token
-  const SECRET_KEY = config.jwt.secretKey;
+  const SECRET_KEY = process.env.JWT_SECRET || config.jwt.secretKey;
   return jwt.sign(
     {
       id: user.id,

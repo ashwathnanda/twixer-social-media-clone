@@ -7,7 +7,7 @@ const typeDefs = require("./graphql/typeDefs");
 const config = require("./config");
 
 // Constants
-CONNECTION_URI = config.database.connectionString;
+CONNECTION_URI = process.env.DBSTRING || config.database.connectionString;
 APP_PORT = process.env.PORT || 5000;
 
 //PubSub Class Instantiate
