@@ -1,23 +1,22 @@
 import React, { useContext, useState } from "react";
 import { Menu, Modal } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/auth";
-import PostForm from "./PostForm";
 import CreatePostModal from "./CreatePostModal";
 
 function Menubar() {
   const { user, logout } = useContext(AuthContext);
 
-  const pathName = window.location.pathname;
+  const pathName = useLocation().pathname;
   const path = pathName === "/" ? "home" : pathName.substr(1);
   const [activeItem, setActiveItem] = useState(path);
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
-
+  console.log(useLocation().pathname);
   return user ? (
     <Menu pointing secondary size="massive" color="teal">
       <Menu.Item name={user.username} active as={Link} to="/" />
-      <CreatePostModal />
+      {pathName && pathName === "/" ? <CreatePostModal /> : ""}
       <Menu.Menu position="right">
         <Menu.Item name="logout" onClick={logout} as={Link} to="/login" />
       </Menu.Menu>

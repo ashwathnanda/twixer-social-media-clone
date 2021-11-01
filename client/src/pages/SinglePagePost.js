@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { FETCH_SINGLE_POST_QUERY } from "../utils/graphqlQuery/getPost";
 import {
@@ -12,13 +12,17 @@ import {
   Label,
   Comment,
   Segment,
+  Form,
 } from "semantic-ui-react";
 import moment from "moment";
 import LikeButton from "../components/LikeButton";
 import { AuthContext } from "../context/auth";
 import DeleteButton from "../components/DeleteButton";
+import DeleteCommentButton from "../components/DeleteCommentButton";
+import AddCommentButton from "../components/addCommentButton";
 
 function SinglePagePost(props) {
+  const [deleteButton, showDeleteButton] = useState(false);
   const postId = props.match.params.postId;
 
   const { user } = useContext(AuthContext);
@@ -30,7 +34,7 @@ function SinglePagePost(props) {
   });
 
   const deletePostCallback = () => {
-    props.history.push("/");
+    props.history.push(`/posts/${postId}`);
   };
 
   let postMarkUp;
@@ -47,7 +51,6 @@ function SinglePagePost(props) {
       likeCount,
       commentCount,
     } = getPost.getPost;
-
     postMarkUp = (
       <Grid>
         <Grid.Row>
@@ -87,30 +90,39 @@ function SinglePagePost(props) {
                 )}
               </Card.Content>
             </Card>
-            {comments.map((comment) => (
+            <Header as="h3" dividing>
+              Comments
+            </Header>
+            {comments && comments.length > 0 ? (
               <Segment raised>
                 <Comment.Group>
-                  <Header as="h3" dividing>
-                    Comments
-                  </Header>
-                  <Comment key={comment.id}>
-                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
-                    <Comment.Content>
-                      <Comment.Author as="a">{comment.username}</Comment.Author>
-                      <Comment.Metadata>
-                        <div>{moment(createdAt).fromNow()}</div>
-                      </Comment.Metadata>
-                      <Comment.Text>{comment.body}</Comment.Text>
-                      {user && user.username === comment.username && (
-                        <Comment.Actions>
-                          <Comment.Action>Reply</Comment.Action>
-                        </Comment.Actions>
-                      )}
-                    </Comment.Content>
-                  </Comment>
+                  {comments.map((comment) => (
+                    <Comment key={comment.id}>
+                      <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                      <Comment.Content>
+                        <Comment.Author as="a">
+                          {comment.username}
+                        </Comment.Author>
+                        <Comment.Metadata>
+                          <div>{moment(createdAt).fromNow()}</div>
+                        </Comment.Metadata>
+                        <Comment.Text>{comment.body}</Comment.Text>
+                        {user && user.username === comment.username && (
+                          <DeleteCommentButton
+                            commentId={comment.id}
+                            postId={id}
+                            callback={deletePostCallback}
+                          />
+                        )}
+                      </Comment.Content>
+                    </Comment>
+                  ))}
                 </Comment.Group>
               </Segment>
-            ))}
+            ) : (
+              ""
+            )}
+            {user && <AddCommentButton postId={postId} />}
           </Grid.Column>
         </Grid.Row>
       </Grid>

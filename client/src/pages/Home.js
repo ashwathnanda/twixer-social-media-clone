@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { Grid, GridRow, Image, Transition } from "semantic-ui-react";
 import Postcard from "../components/Postcard";
 import { AuthContext } from "../context/auth";
-import PostForm from "../components/PostForm";
 import { FETCH_POST_QUERY } from "../utils/graphqlQuery/getPosts";
 
 function Home(props) {
@@ -16,12 +15,6 @@ function Home(props) {
         <h1>Recent Posts</h1>
       </GridRow>
       <Grid.Row>
-        {/*{user && (*/}
-        {/*  <Grid.Column>*/}
-        {/*    <PostForm />*/}
-        {/*  </Grid.Column>*/}
-        {/*)}*/}
-
         {loading ? (
           <h1>Loading Posts..</h1>
         ) : (

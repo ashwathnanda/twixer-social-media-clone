@@ -9,11 +9,13 @@ export const FETCH_SINGLE_POST_QUERY = gql`
       body
       likes {
         id
+        username
         createdAt
         username
       }
       comments {
         id
+        username
         createdAt
         body
       }

@@ -7,6 +7,7 @@ const commentsResolver = {
     async addComment(_, { postId, body }, context) {
       const user = verifyAndReturnUser(context);
       // Input validation
+      //
       if (body.trim() === "") {
         throw new UserInputError("Comment must not be empty.", {
           errors: {
