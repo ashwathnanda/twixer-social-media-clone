@@ -9,7 +9,7 @@ import {
 import { setContext } from "apollo-link-context";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000",
+  uri: "https://twixer-smc.herokuapp.com/",
 });
 
 const authLink = setContext(() => {
