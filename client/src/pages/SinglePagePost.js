@@ -13,6 +13,7 @@ import {
   Comment,
   Segment,
   Form,
+  Popup,
 } from "semantic-ui-react";
 import moment from "moment";
 import LikeButton from "../components/LikeButton";
@@ -71,18 +72,24 @@ function SinglePagePost(props) {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} postInfo={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log("Comment")}
-                >
-                  <Button basic color="blue">
-                    <Icon name="comments" />
-                  </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                <Popup
+                  content="Comment"
+                  inverted
+                  trigger={
+                    <Button
+                      as="div"
+                      labelPosition="right"
+                      onClick={() => console.log("Comment")}
+                    >
+                      <Button basic color="blue">
+                        <Icon name="comments" />
+                      </Button>
+                      <Label basic color="blue" pointing="left">
+                        {commentCount}
+                      </Label>
+                    </Button>
+                  }
+                />
                 {user && user.username === username ? (
                   <DeleteButton postId={id} callback={deletePostCallback} />
                 ) : (
